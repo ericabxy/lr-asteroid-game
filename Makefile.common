@@ -1,0 +1,2 @@
+SOURCES_C   := $(CORE_DIR)/libretro.c $(CORE_DIR)/g_game.c $(CORE_DIR)/r_draw.c
+SOURCES_CXX := 
