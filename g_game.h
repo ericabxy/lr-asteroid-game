@@ -10,6 +10,7 @@
 #define MAXASTEROIDS 10
 #define MAXBULLETS 20
 #define MAXSHIPS 2
+#define MAXSTARS 2000
 // Bullet properties.
 #define BULLETSIZE 5
 #define BULLETSPEED 500
@@ -57,9 +58,16 @@ typedef struct
 
 typedef struct
 {
+    int x, y;
+    uint32_t color;
+} star_t;
+
+typedef struct
+{
     ship_t ship;
     bullet_t bullets[MAXBULLETS];
     asteroid_t asteroids[MAXASTEROIDS];
+    star_t stars[MAXSTARS];
 } game_t;
 
 void G_SpawnAsteroid(game_t *game, int x, int y, int radius, float angle, float speed);

@@ -171,6 +171,7 @@ void retro_run(void)
 
    G_UpdateGame(&game_state);
    G_RenderGame(&game_state, frame_buf);
+   R_SetPixel(frame_buf, 400, 100, 0xffffff); 
    
    audio_callback();
 

@@ -83,6 +83,15 @@ void G_InitGame(game_t *game)
         game->bullets[i].speed = BULLETSPEED;
         game->bullets[i].radius = BULLETSIZE;
     }
+
+    // Initialize stars.
+    for (int i = 0; i < MAXSTARS; i++)
+    {
+        char gray = rand() % 256;
+        game->stars[i].x = rand() % WINDOW_WIDTH;
+        game->stars[i].y = rand() % WINDOW_HEIGHT;
+        game->stars[i].color = (gray << 16) + (gray << 8) + gray;
+    }
 }
 
 void G_Joystick(game_t *game, int direction)
@@ -230,7 +239,13 @@ void G_UpdateGame(game_t *game)
 
 void G_RenderGame(game_t *game, uint32_t *buf)
 {
+    // Draw starfield background.
     R_FillRect(buf, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, 0x000000);
+    for (int i = 0; i < MAXSTARS; i++)
+    {
+        R_SetPixel(buf, game->stars[i].x, game->stars[i].y, game->stars[i].color);
+    }
+
     R_FillCircle(buf, game->ship.x, game->ship.y, game->ship.radius, 0x0000ff);
     R_FillCircle(
         buf,
