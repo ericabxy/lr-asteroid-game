@@ -148,14 +148,8 @@ void G_UpdateGame(game_t *game)
     game->ship.bulletTimer += DELTATIME;
     game->ship.x += game->ship.speedX * DELTATIME;
     game->ship.y += game->ship.speedY * DELTATIME;
-    if (game->ship.x > WINDOW_WIDTH)
-        game->ship.x = game->ship.x - WINDOW_WIDTH;
-    else if (game->ship.x < 0)
-        game->ship.x = WINDOW_WIDTH + game->ship.x;
-    if (game->ship.y > WINDOW_HEIGHT)
-        game->ship.y = game->ship.y - WINDOW_HEIGHT;
-    else if (game->ship.y < 0)
-        game->ship.y = WINDOW_HEIGHT + game->ship.y;
+    game->ship.x = fmod(fmod(game->ship.x, WINDOW_WIDTH) + WINDOW_WIDTH, WINDOW_WIDTH);
+    game->ship.y = fmod(fmod(game->ship.y, WINDOW_HEIGHT) + WINDOW_HEIGHT, WINDOW_HEIGHT);
 
     // Update asteroids.
     for (int i = 0; i < MAXASTEROIDS; i++)

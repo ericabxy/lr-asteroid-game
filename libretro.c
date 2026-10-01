@@ -156,6 +156,13 @@ static void update_input(void)
    }
 }
 
+static void video_callback(void)
+{
+   G_RenderGame(&game_state, frame_buf);
+
+   video_cb(frame_buf, WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_WIDTH << 2);
+}
+
 static void check_variables(void)
 {
 }
@@ -168,14 +175,10 @@ static void audio_callback(void)
 void retro_run(void)
 {
    update_input();
-
-   G_UpdateGame(&game_state);
-   G_RenderGame(&game_state, frame_buf);
-   R_SetPixel(frame_buf, 400, 100, 0xffffff); 
-   
    audio_callback();
+   video_callback();
 
-   video_cb(frame_buf, WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_WIDTH << 2);
+   G_UpdateGame(&game_state);   
 
    bool updated = false;
    if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE_UPDATE, &updated) && updated)

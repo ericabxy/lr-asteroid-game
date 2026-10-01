@@ -13,12 +13,10 @@
 void R_SetPixel(uint32_t *buf, int x, int y, uint32_t rgba)
 {
    int stride = WINDOW_WIDTH;
-   int pixels = WINDOW_WIDTH * WINDOW_HEIGHT;
 
-   x %= WINDOW_WIDTH;
-   y %= WINDOW_HEIGHT;
-   if (y * stride + x <= pixels && y * stride + x >= 0)
-      buf[y * stride + x] = rgba;
+   x = ((x % WINDOW_WIDTH) + WINDOW_WIDTH) % WINDOW_WIDTH;
+   y = ((y % WINDOW_HEIGHT) + WINDOW_HEIGHT) % WINDOW_HEIGHT;
+   buf[y * stride + x] = rgba;
 }
 
 //
