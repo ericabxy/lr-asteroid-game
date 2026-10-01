@@ -2,6 +2,8 @@
 
 An asteroids clone written in C for LibRetro.
 
+![Screenshot of Asteroid Game in progress.](screenshots/Asteroid Game-261001-102655.png)
+
 ## Getting Started
 
     make
